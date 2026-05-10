@@ -1,3 +1,4 @@
+// App.jsx atualizado para deploy unificado
 import { useState } from 'react'
 
 function App() {
@@ -15,14 +16,14 @@ function App() {
     setErroApi(null);
 
     try {
-      const response = await fetch('http://localhost:3001/buscar', {
+      // USANDO URL RELATIVA PARA O DEPLOY UNIFICADO
+      const response = await fetch('/buscar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome, url })
       });
 
       const data = await response.json();
-
       if (!response.ok) throw new Error(data.detalhes || "Erro no servidor.");
       
       setResultado(data);
@@ -33,6 +34,7 @@ function App() {
     }
   }
 
+  // ... (O restante do seu código de retorno/estilos permanece igual)
   return (
     <div style={styles.container}>
       <div style={styles.header}>
@@ -115,7 +117,7 @@ function App() {
         </div>
       )}
     </div>
-  )
+  );
 }
 
 const styles = {
